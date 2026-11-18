@@ -39,7 +39,7 @@ void executar_jogo(personagem *heroi) {
             mvprintw(offset_y + 0, offset_x + COLUNAS + 4, "Stamina: %d  ", heroi->stamina);
             refresh();
 
-            // Verifica Morte por Cansaço
+       
             if (heroi->stamina <= 0) {
                 clear();
                 const char *morte = "Sua visao escurece. Voce desabou de exaustao.";
@@ -47,7 +47,7 @@ void executar_jogo(personagem *heroi) {
                 refresh();
                 napms(3000);
                 jogando = 0;
-                break; // Sai do loop do jogo e volta para o menu inicial
+                break; 
             }
 
             int tecla = getch();
@@ -62,7 +62,7 @@ void executar_jogo(personagem *heroi) {
                 gerar_linha(topo);
                 passos_dados++; 
                 
-                // MÁGICA AQUI: Perde 1 de stamina a cada passo dado!
+                
                 heroi->stamina -= 1; 
             }
 
@@ -72,12 +72,12 @@ void executar_jogo(personagem *heroi) {
 
             if (passos_dados == 20) {
                 mostrar_casa(heroi);
-                passos_dados = 21; // Impede a casa de repetir
-                timeout(50); // Restaura a velocidade contínua do mapa
+                passos_dados = 21;
+                timeout(50); 
             }
         }
         
-        // Se saiu do `while (jogando)`, quebra o while(true) externo também
+        
         if (jogando == 0) {
             break; 
         }

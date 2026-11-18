@@ -262,7 +262,7 @@ void explorar_casa(personagem *p) {
         int offset_y = (tela_linhas - linhas_casa) / 2;
         int offset_x = (tela_colunas - colunas_casa) / 2;
 
-        // Desenha a arquitetura do andar correto
+        
         for (int i = 0; i < linhas_casa; i++) {
             if (andar_atual == 1) {
                 mvprintw(offset_y + i, offset_x, "%s", mapa_andar1[i]);
@@ -271,15 +271,15 @@ void explorar_casa(personagem *p) {
             }
         }
 
-        // Desenha o jogador
+  
         mvaddch(offset_y + py, offset_x + px, '@');
 
-        // Interface superior
+
         mvprintw(offset_y - 3, offset_x, "Stamina: %d ", p->stamina);
         mvprintw(offset_y - 2, offset_x, "[W,A,S,D] Andar | [E] Interagir | [Q] Sair da casa");
         mvprintw(offset_y - 1, offset_x, "Andar Atual: %d", andar_atual);
 
-        // Sistema de mensagens flutuantes
+        
         if (msg_timer > 0) {
             attron(A_REVERSE);
             mvprintw(offset_y + linhas_casa + 2, (tela_colunas - tamanho_utf8(mensagem_interacao)) / 2, "%s", mensagem_interacao);
@@ -289,7 +289,7 @@ void explorar_casa(personagem *p) {
 
         refresh();
 
-        // Leitura de controles
+        
         int tecla = getch();
         int novo_x = px;
         int novo_y = py;
@@ -298,15 +298,15 @@ void explorar_casa(personagem *p) {
         if (tecla == 'd') novo_x++;
         if (tecla == 'w') novo_y--;
         if (tecla == 's') novo_y++;
-        if (tecla == 'q') jogando_casa = 0; // Sai do loop e volta pra estrada
+        if (tecla == 'q') jogando_casa = 0; 
 
-        // Mecânica de Interação (Botão E)
+       
         if (tecla == 'e') {
             if (andar_atual == 1) {
                 if (py >= 8) {
-                    // Sobe as escadas
+                    
                     andar_atual = 2;
-                    py = 7; // Coloca o player logo acima da escada no andar 2
+                    py = 7; 
                     snprintf(mensagem_interacao, sizeof(mensagem_interacao), "Voce subiu para o segundo andar.");
                     msg_timer = 60;
                 } 
@@ -327,9 +327,9 @@ void explorar_casa(personagem *p) {
             } 
             else if (andar_atual == 2) {
                 if (py >= 8) {
-                    // Desce as escadas
+                   
                     andar_atual = 1;
-                    py = 7; // Coloca o player logo acima da escada no andar 1
+                    py = 7; 
                     snprintf(mensagem_interacao, sizeof(mensagem_interacao), "Voce desceu para o primeiro andar.");
                     msg_timer = 60;
                 } 
@@ -350,7 +350,7 @@ void explorar_casa(personagem *p) {
             }
         }
 
-        // Sistema de Colisão Perfeita para Múltiplos Mapas
+       
         if (novo_y >= 0 && novo_y < linhas_casa && novo_x >= 0 && novo_x < colunas_casa) {
             char espaco_destino = (andar_atual == 1) ? mapa_andar1[novo_y][novo_x] : mapa_andar2[novo_y][novo_x];
             
@@ -475,6 +475,6 @@ void mostrar_casa(personagem *p) {
         const char *msg_fuga = "Voce ignora a casa.";
         mvprintw(tela_linhas / 2, (tela_colunas - tamanho_utf8(msg_fuga)) / 2, "%s", msg_fuga);
         refresh();
-        napms(2500); // Pausa para o jogador ler
+        napms(2500); 
     }
 }

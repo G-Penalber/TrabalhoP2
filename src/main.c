@@ -8,10 +8,10 @@ int main() {
         int opcao = mostrar_menu();
 
         if (opcao == 0) {
-            // Inicializa herói padrão
+        
             personagem heroi = { .stamina = 100, .missao = 0 };
             
-            // Inicia o fluxo de gameplay
+        
             pedir_nome(&heroi);
             mostrar_introducao(heroi.nome);
             executar_jogo(&heroi);
@@ -23,7 +23,6 @@ int main() {
         }
     }
 
-    // Finaliza o ambiente Ncurses antes de fechar o programa
     endwin();
     return 0;
 }
